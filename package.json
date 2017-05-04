@@ -1,0 +1,21 @@
+{
+  "name": "student-board",
+  "version": "1.0.0",
+  "description": "A simple student board using next.js/react/redux/semantic-ui",
+  "author": "Louis Larpin",
+  "license": "MIT",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^2.2.0",
+    "next-redux-wrapper": "^1.1.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-redux": "^5.0.4",
+    "redux": "^3.6.0",
+    "semantic-ui-react": "^0.68.2"
+  }
+}
