@@ -2,36 +2,75 @@ import React, { Component } from 'react'
 import { Form } from 'semantic-ui-react'
 
 const genderOptions = [
-  { key: 'm', text: 'Male', value: 'male' },
-  { key: 'f', text: 'Female', value: 'female' },
+  { text: 'Male', value: 'M', key: 'M' },
+  { text: 'Female', value: 'F', key: 'F' },
 ]
 
 export default class extends Component {
+  constructor() {
+    super()
+    this.state = {
+      firstName: '',
+      lastName: '',
+      gender: '',
+      age: ''
+    }
+  }
+
+  componentWillMount() {
+    if (this.props.student) { this.setState(this.props.student) }
+  }
+
+  _onInputChange(event) {
+    const target = event.target
+    this.setState({ [target.name]: target.value })
+  }
+
+  _onSelectChange(event) {
+    const value = event.target.textContent == 'Male' ? 'M' : 'F'
+    this.setState({ gender: value })
+  }
+
+  _onFormSubmit() {
+    console.log(this.state)
+  }
+
   render() {
     return (
-      <Form>
+      <Form
+        onSubmit={this._onFormSubmit.bind(this)}>
         <Form.Field>
           <label>First name</label>
           <input
+            value={this.state.firstName}
+            onChange={this._onInputChange.bind(this)}
+            name="firstName"
             placeholder='First name'
-            value={this.props.student.firstName}
-          />
+            required />
         </Form.Field>
         <Form.Field>
           <label>Last name</label>
           <input
+            value={this.state.lastName}
+            onChange={this._onInputChange.bind(this)}
+            name="lastName"
             placeholder='Last name'
-            value={this.props.student.lastName}
-          />
+            required />
         </Form.Field>
         <Form.Select
-          label='Gender'
+          value={this.state.gender}
+          onChange={this._onSelectChange.bind(this)}
           options={genderOptions}
+          name="gender"
+          label='Gender'
           placeholder='Gender' />
         <Form.Field
-          label='Age'
+          value={this.state.age}
+          onChange={this._onInputChange.bind(this)}
+          name="age"
           control='input'
           type='number'
+          label='Age'
           placeholder='Age' />
       </Form>
     )

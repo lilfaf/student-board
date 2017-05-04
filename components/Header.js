@@ -1,5 +1,6 @@
 import Router from 'next/router'
 import { Button, Container, Menu } from 'semantic-ui-react'
+import StudentModal from './StudentModal'
 
 export default () => (
   <Menu
@@ -10,9 +11,7 @@ export default () => (
         name="Student Board"
         onClick={() => { Router.replace('/') }} />
       <Menu.Item>
-        <Button primary>
-          Add Student
-        </Button>
+        <StudentModal />
       </Menu.Item>
     </Container>
   </Menu>
