@@ -3,7 +3,13 @@ import { bindActionCreators } from 'redux'
 import withRedux from 'next-redux-wrapper'
 import { Grid } from 'semantic-ui-react'
 import { initStore } from '../store'
-import { editStudent, cancelEditStudent, deleteStudent } from '../actions/index'
+import {
+  editStudent,
+  cancelEditStudent,
+  deleteStudent,
+  saveStudent,
+  updateStudent
+} from '../actions/index'
 import StudentList from '../components/StudentList'
 import Student from '../components/Student'
 import Layout from '../components/Layout'
@@ -24,7 +30,7 @@ class StudentsPage extends Component {
 
     return (
       <div>
-        <Layout>
+        <Layout {...this.props}>
           <Grid>
             <Grid.Row>
               <Grid.Column width={8}>
@@ -38,11 +44,7 @@ class StudentsPage extends Component {
                 {studentId &&
                   <Student
                     student={this._getStudent(studentId)}
-                    isEditing={this.props.isEditing}
-                    onEditStudent={this.props.editStudent}
-                    onCancelEditStudent={this.props.cancelEditStudent}
-                    onDeleteStudent={this.props.deleteStudent}
-                  />
+                    {...this.props} />
                 }
               </Grid.Column>
             </Grid.Row>
@@ -65,7 +67,9 @@ const mapDispatchToProps = (dispatch) => {
     showStudent: bindActionCreators(cancelEditStudent, dispatch),
     editStudent: bindActionCreators(editStudent, dispatch),
     cancelEditStudent: bindActionCreators(cancelEditStudent, dispatch),
-    deleteStudent: bindActionCreators(deleteStudent, dispatch)
+    deleteStudent: bindActionCreators(deleteStudent, dispatch),
+    saveStudent: bindActionCreators(saveStudent, dispatch),
+    updateStudent: bindActionCreators(updateStudent, dispatch)
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 
 const genderOptions = [
   { text: 'Male', value: 'M', key: 'M' },
@@ -31,8 +31,8 @@ export default class extends Component {
     this.setState({ gender: value })
   }
 
-  _onFormSubmit() {
-    console.log(this.state)
+  _onFormSubmit(event) {
+    this.props.onFormSubmit(event, this.state)
   }
 
   render() {
@@ -72,6 +72,7 @@ export default class extends Component {
           type='number'
           label='Age'
           placeholder='Age' />
+        {this.props.children}
       </Form>
     )
   }

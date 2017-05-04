@@ -1,27 +1,34 @@
 import React, { Component } from 'react'
+import Router from 'next/router'
 import { Card, Button, Icon, Message } from 'semantic-ui-react'
 import StudentForm from './StudentForm'
 
 export default class extends Component {
   _onDeleteClick() {
-    this.props.onDeleteStudent(this.props.student.id)
+    this.props.deleteStudent(this.props.student.id)
+    Router.replace('/students')
   }
 
   _onEditClick() {
-    this.props.onEditStudent()
+    this.props.editStudent()
   }
 
   _onCancelEditClick() {
-    this.props.onCancelEditStudent()
+    this.props.cancelEditStudent()
+  }
+
+  _onFormSubmit(event, student) {
+    event.preventDefault()
+    this.props.updateStudent(student)
   }
 
   render() {
     if (!this.props.student) {
       return (
         <div>
-          <Message positive>
+          <Message negative>
             <Message.Header>
-              Student deleted !
+              Student Not Fount!
             </Message.Header>
           </Message>
         </div>
@@ -37,7 +44,20 @@ export default class extends Component {
         <Card.Content header={header} />
         <Card.Content>
           {this.props.isEditing ? (
-              <StudentForm student={this.props.student} />
+              <StudentForm
+                student={this.props.student}
+                onFormSubmit={this._onFormSubmit.bind(this)}>
+                <Button
+                  type="submit"
+                  primary>
+                  Save
+                </Button>
+                <Button
+                  onClick={this._onCancelEditClick.bind(this)}
+                  negative>
+                  Cancel
+                </Button>
+              </StudentForm>
             ) : (
               <div>
                 <p><Icon name="user" />{fullName}</p>
@@ -47,31 +67,21 @@ export default class extends Component {
             )
           }
         </Card.Content>
-        <Card.Content extra>
-          {this.props.isEditing ? (
-              <div>
-                <Button primary>Save</Button>
-                <Button
-                  onClick={this._onCancelEditClick.bind(this)}
-                  negative>
-                  Cancel
-                </Button>
-              </div>
-            ) : (
-              <div>
-                <Button
-                  onClick={this._onEditClick.bind(this)}>
-                  Edit
-                </Button>
-                <Button
-                  onClick={this._onDeleteClick.bind(this)}
-                  negative>
-                  Delete
-                </Button>
-              </div>
-            )
-          }
-        </Card.Content>
+        {!this.props.isEditing &&
+          <Card.Content extra>
+            <div>
+              <Button
+                onClick={this._onEditClick.bind(this)}>
+                Edit
+              </Button>
+              <Button
+                onClick={this._onDeleteClick.bind(this)}
+                negative>
+                Delete
+              </Button>
+            </div>
+          </Card.Content>
+        }
       </Card>
     )
   }

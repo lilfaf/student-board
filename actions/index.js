@@ -21,3 +21,10 @@ export const saveStudent = (student) => {
     student: student
   }
 }
+
+export const updateStudent = (student) => {
+  return {
+    type: actionTypes.UPDATE_STUDENT,
+    student: student
+  }
+}

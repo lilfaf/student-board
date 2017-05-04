@@ -18,6 +18,12 @@ export default class extends Component {
     this.setState({ isOpened: false })
   }
 
+  _onFormSubmit(event, student) {
+    event.preventDefault()
+    this.props.saveStudent(student)
+    this.setState({ isOpened: false })
+  }
+
   render() {
     return (
       <Modal
@@ -32,19 +38,18 @@ export default class extends Component {
         }>
         <Modal.Header>Add Student</Modal.Header>
         <Modal.Content>
-          <StudentForm />
+          <StudentForm onFormSubmit={this._onFormSubmit.bind(this)}>
+            <Button type="submit">
+              Add
+            </Button>
+            <Button
+              negative
+              onClick={this._onCancelClick.bind(this)}>
+              Cancel
+            </Button>
+          </StudentForm>
           { this.props.children }
         </Modal.Content>
-        <Modal.Actions>
-          <Button>
-            Add
-          </Button>
-          <Button
-            negative
-            onClick={this._onCancelClick.bind(this)}>
-            Cancel
-          </Button>
-        </Modal.Actions>
       </Modal>
     )
   }

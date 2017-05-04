@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { bindActionCreators } from 'redux'
 import withRedux from 'next-redux-wrapper'
 import { initStore } from '../store'
+import { saveStudent } from '../actions/index'
 import { Container, Grid } from 'semantic-ui-react'
 import Header from '../components/Header'
 import StudentList from '../components/StudentList'
@@ -14,7 +16,7 @@ class Page extends Component {
   render() {
     return (
       <div>
-        <Layout>
+        <Layout {...this.props}>
           <Grid>
             <Grid.Row>
               <Grid.Column width={8}>
@@ -29,7 +31,9 @@ class Page extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return {}
+  return {
+    saveStudent: bindActionCreators(saveStudent, dispatch)
+  }
 }
 
 export default withRedux(
