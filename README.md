@@ -2,6 +2,11 @@
 
 This is a very simple exercice to try out various JS tech :tongue: :wink:
 
+- [Next.js](https://github.com/zeit/next.js) (server side redering)
+- React
+- Redux
+- [Semantic-UI-React](https://github.com/Semantic-Org/Semantic-UI-React)
+
 ## How to use
 
 Clone the repo:
