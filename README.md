@@ -24,4 +24,4 @@ yarn run dev
 
 ## The idea behind the example
 
-TODO
+The idea behind the project was to test next.js in conjunction with Redux and Semantic UI toolkit. Turned out it was pretty nice experience, `pages` impose some sort of architecture, forcing you to centralize action dispatching. This allows good seperation of concerns
